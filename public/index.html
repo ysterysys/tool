@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>My Angular App!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script scrc="angular-route.min.js"></script>
+    <script src="angularApp.js"></script>
+ 
+ 
+  <script type="text/ng-template" id="/home.html">
+  <div class="page-header">
+    <h1>Flapper News</h1>
+  </div>
+</script>
+
+
+  <style>
+  h4[contentEditable="true"]{
+  background: gray;
+  padding:3px;
+  }
+  </style>
+  
+
+ 
+
+  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+</head>
+<body ng-app="tasktool" ng-controller="MainCtrl">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9">
+
+      <div class="page-header">
+        <h1>Task Tool</h1>
+      </div>
+
+      <div ng-repeat="post in posts | orderBy:'-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up"
+          ng-click="incrementUpvotes(post)"></span>
+        {{post.upvotes}}
+        <span style="font-size:20px; margin-left:10px;">
+          <a ng-show="post.link" href="{{post.link}}">
+            {{post.title}}
+          </a>
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </span>
+      </div>
+
+      <form ng-submit="addPost()"
+        style="margin-top:30px;">
+        <h3>Add a new post</h3>
+
+        <div class="form-group">
+          <input type="text"
+            class="form-control"
+            placeholder="Title"
+            ng-model="title"></input>
+        </div>
+        <div class="form-group">
+          <input type="text"
+          class="form-control"
+          placeholder="Link"
+          ng-model="link"></input>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+	  
+	  <input ng-model="post.title" class = "form-control" placeholder = "title"/>
+	  <button ng-click="createPost(post)" class = "btn btn-primary">Post </button>
+	  <button ng-click="updatePost(post)" class = "btn btn-success">Update </button>
+	  
+		<div ng-repeat="post in posts">
+		<div ng-if="!post.is_tag"><h2>{{post.title}}</h2>
+		<a ng-click="deletePost(post._id)" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+		<a ng-click="editPost(post._id)" class="pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
+		<h3>{{post.posted}}</h3>
+		</div>
+		</div>
+    </div>
+	<div class="col-md-3">
+	
+	<h1>Tags</h1>
+	<div class="col-md-12" style="border:5px groove; padding:5px;height:250px;word-wrap: break-word">
+	<a ng-click="toggle()" class="pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
+	<input ng-show="editBox" ng-model="tagging" class = "form-control" placeholder = "tags"/>
+
+	<div ng-if="post.is_tag" ng-repeat="post in posts">
+	<h4 ng-hide="post.edit"	ng-model="post.title" ng-dblclick="contentEdit(post)">{{post.title}}</h4>
+	<form ng-submit="doneEditing(post)" ng-show="post.edit">
+              <input ng-model="post.title">
+			  <form>
+			  </div>
+	<button ng-show="editBox" ng-click="createTag(); toggle()" class = "btn btn-success">Ok</button>
+	</div>
+	</div>
+  </div>
+  </div>
+</body>
+</html>

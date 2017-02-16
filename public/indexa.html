@@ -1,0 +1,18 @@
+
+<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="angularApp.js"></script>
+ 
+</head>
+
+<body>
+
+<div ng-controller="loginCtrl">
+	<form action="/" id="myLogin">
+		Username: <input type= "text" ng-model="username"></br>
+		Password: <input type= "password" ng-model="password"></br>
+		<button type="button" ng-click="submit()">Log in</button>
+		</form>
+</body>
